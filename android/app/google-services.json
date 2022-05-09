@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "863255635718",
+    "firebase_url": "https://hunch-test-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hunch-test-app",
+    "storage_bucket": "hunch-test-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863255635718:android:850a26fb7cf03eeffae087",
+        "android_client_info": {
+          "package_name": "com.example.hunch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863255635718-anusk6t8mkpkur6aa17p79mesvshrvl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqjaeAPz13jHnMYS33qtKLNaUS2Sqa2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863255635718-anusk6t8mkpkur6aa17p79mesvshrvl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863255635718:android:97da4577bd9b574ffae087",
+        "android_client_info": {
+          "package_name": "com.example.hunchtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863255635718-anusk6t8mkpkur6aa17p79mesvshrvl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqjaeAPz13jHnMYS33qtKLNaUS2Sqa2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863255635718-anusk6t8mkpkur6aa17p79mesvshrvl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
