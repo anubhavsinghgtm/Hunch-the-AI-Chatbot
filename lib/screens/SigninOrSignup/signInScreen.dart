@@ -147,15 +147,17 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
     if (_formKey.currentState!.validate()) {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-              email: _emailTextController.text,
+              email: _emailTextController.text.trim(),
               password: _passwordTextController.text)
           .then((value) async {
         Fluttertoast.showToast(msg: "Loggedin Successful");
         Socket socket = await connectMe();
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MessageScreen(socket: socket)));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MessageScreen(socket: socket),
+          ),
+        );
       }).catchError((e) {
         Fluttertoast.showToast(msg: e!.message);
       });
