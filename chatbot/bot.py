@@ -371,7 +371,7 @@ class multiClient:
         except:
             name = name.split()[0]
         name = name[0].upper() + name[1:]
-        msg = "Hi " + name + "! My name's Brad. Let's start with our session."
+        msg = "Hi " + name + "! My name's Hunch. Let's start with our session."
         msg = msg.encode()
         self.c.send(msg)
 
