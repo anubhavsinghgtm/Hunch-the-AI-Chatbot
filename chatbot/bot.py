@@ -42,25 +42,6 @@ vocab = Dictionary.load('SentimentAnalysis/vocab_sentiment')
 
 
 finish = None
-def predict(text):
-    preprocessed = [word[:-3] if word[-3:] == 'xxx' else word for word in
-                    preprocess_string(text.lower().replace('not', 'notxxx'))]
-    txt_list = [(vocab.token2id[word] + 1) for word in preprocessed
-                if word in vocab.token2id.keys()]
-    txt_list = [txt_list]
-    max_tweet_len = 20
-    if len(txt_list[0]) < max_tweet_len:
-        for i in range(max_tweet_len - len(txt_list[0])):
-            txt_list[0].append(0)
-    elif len(txt_list[0]) > max_tweet_len:
-        while len(txt_list[-1]) > max_tweet_len:
-            txt_list.append(txt_list[-1][max_tweet_len:])
-            txt_list[-2] = txt_list[-2][:max_tweet_len]
-    prediction = 0
-    for txt in txt_list:
-        prediction += model.predict(np.array([txt]), batch_size=1)
-    prediction /= len(txt_list)
-    return prediction
 
 finisher = 'It was really nice talking to you and I hope that now you feel better after talking to me.\nBest of luck for your future endeavours. Bye!'
 
@@ -108,13 +89,13 @@ class multiClient:
         self.c.send(msg)
         response = self.c.recv(1024)
         response = response.decode()
-        if(predict(response) >=0.4):
+        if(self.predict(response) >=0.4):
             msg = 'Have you broken up with someone recently?\n'
             msg = msg.encode()
             self.c.send(msg)
             response = self.c.recv(1024)
             response = response.decode()
-            if(predict(response)>=0.4):
+            if(self.predict(response)>=0.4):
                 msg = name + ", don't feel sad. Take your time and heal properly,"\
                   " look at what's happened, learn from it, and find ways to "\
                   "build a new and healthy life.\nAll any of us wants is to "\
@@ -197,19 +178,19 @@ class multiClient:
         response = self.c.recv(1024)
         response = response.decode()
 
-        if(predict(response)>=0.4):
+        if(self.predict(response)>=0.4):
             msg = 'It seems like though the issue might be a little worrisome, it might not actually be very serious. What are your thoughts on this?\n'
             msg = msg.encode()
             self.c.send(msg)
             response = self.c.recv(1024)
             response = response.decode()
-            if(predict(response)>=0.5):
+            if(self.predict(response)>=0.5):
                 msg = 'Looks like you agree with me. Wanna sign off?\n'
                 msg = msg.encode()
                 self.c.send(msg)
                 response = self.c.recv(1024)
                 response = response.decode()
-                if(predict(response)>0.55):
+                if(self.predict(response)>0.55):
                     msg = "That's okay. It was nice talking to you. You can chat with me anytime you want.\nBye " + name + "!"
                     msg =msg.encode()
                     self.c.send(msg)
@@ -235,7 +216,7 @@ class multiClient:
         response = self.c.recv(1024)
         response = response.decode()
     
-        if(predict(response)>=0.3):
+        if(self.predict(response)>=0.3):
             msg = 'I see. Among the thoughts occuring in your mind, which one upsets you the most?\n'
             msg = msg.encode()
             self.c.send(msg)
@@ -266,7 +247,7 @@ class multiClient:
             self.c.send(msg)
             response = self.c.recv(1024)
             response = response.decode()
-            if(predict(response)>=0.4):
+            if(self.predict(response)>=0.4):
                 msg = "I'm glad that you realised that the opposite could be "\
                   "true. The reason these are called 'false beliefs' is "\
                   "because they are extreme ways of perceiving the world. "\
@@ -308,7 +289,7 @@ class multiClient:
 
         response = self.c.recv(1024)
         response = response.decode()
-        if(predict(response)>=0.3):
+        if(self.predict(response)>=0.3):
             self.sad2(name)
             #f1 = threading.Thread(target=sad2, args=(name,c,))
             #f1.start()
@@ -340,12 +321,12 @@ class multiClient:
 
         response = self.c.recv(1024)
         response_worklife = response.decode()
-        if(predict(response_friends)<=0.3):
+        if(self.predict(response_friends)<=0.3):
             self.friends(name)
             #fri = threading.Thread(target=friends, args=(name,c,))
             #fri.start()
         else:
-            if(predict(response_family)<=0.3):
+            if(self.predict(response_family)<=0.3):
                 self.family(name)
                 #f = threading.Thread(target=family, args=(name,c,))
                 #f.start()
@@ -356,8 +337,10 @@ class multiClient:
     
     @catch_exception
     def sendMsg(self):
-        msg = 'Hello! Thanks for coming here. I am a chatbot. People say thatI am a kind and approachable bot.'.encode()
+        msg = 'Hello! Thanks for coming here. I am a chatbot. People say that I am a kind and approachable bot.'.encode()
         self.c.send(msg)
+        msg = self.c.recv(1024)
+        msg = msg.decode()
         msg  = 'Please tell me your name.\n'.encode()
         self.c.send(msg)
 
@@ -381,21 +364,21 @@ class multiClient:
 
         response = self.c.recv(1024)
         response = response.decode()
-        if (predict(response) >= 0.55):
+        if (self.predict(response) >= 0.55):
             msg = 'That is good. Are you usually this happy, or are there some worries that you want to talk about?\n'
             msg = msg.encode()
             self.c.send(msg)
 
             response = self.c.recv(1024)
             response = response.decode()
-            if (predict(response)>=0.7):
+            if (self.predict(response)>=0.7):
                 msg = 'You seem to be really content. Wanna sign off?\n'
                 msg = msg.encode()
                 self.c.send(msg)
 
                 response = self.c.recv(1024)
                 response = response.decode()
-                if(predict(response)>=0.7):
+                if(self.predict(response)>=0.7):
                     msg = 'Ok, bye ' + name + '!'
                     msg = msg.encode()
                     self.c.send(msg)
@@ -406,7 +389,7 @@ class multiClient:
 
                     response = self.c.recv(1024)
                     response = response.decode()
-                    if(predict(response)>=0.7):
+                    if(self.predict(response)>=0.7):
                         msg = "That's okay. It was nice talking to you. You can chat with me anytime you want.\n Bye" + name + "!"
                         msg = msg.encode()
                         self.c.send(msg)
