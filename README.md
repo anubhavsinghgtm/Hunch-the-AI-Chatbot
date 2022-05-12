@@ -1,6 +1,6 @@
 # hunch
 
-A new Flutter project.
+This is an AI powered NLP based sentiment chat application. It ask some questions and understand the sentiment level of yours as per your replies and try to heal you up. 
 
 ## Getting Started
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hunch/components/text_field_container.dart';
 
-class RoundedPasswordField extends StatelessWidget {
+// ignore: must_be_immutable
+class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final String hintText;
   final TextEditingController controller;
@@ -16,25 +17,39 @@ class RoundedPasswordField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<RoundedPasswordField> createState() => _RoundedPasswordFieldState();
+}
+
+class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
+  bool _isObscure = true;
+
+  @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
-        controller: controller,
-        obscureText: true,
-        onChanged: onChanged,
+        controller: widget.controller,
+        obscureText: _isObscure,
+        onChanged: widget.onChanged,
         cursorColor: Colors.white,
         decoration: InputDecoration(
           icon: const Icon(
             Icons.lock,
           ),
-          hintText: hintText,
+          hintText: widget.hintText,
           border: InputBorder.none,
-          suffixIcon: const Icon(
-            Icons.visibility,
+          suffixIcon: IconButton(
+            icon: Icon(
+              _isObscure ? Icons.visibility : Icons.visibility_off,
+            ),
+            onPressed: () {
+              setState(() {
+                _isObscure = !_isObscure;
+              });
+            },
           ),
         ),
       ),
-      validator: validator,
+      validator: widget.validator,
     );
   }
 }

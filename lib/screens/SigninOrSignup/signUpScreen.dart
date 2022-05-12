@@ -38,6 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
         child: Form(
@@ -47,12 +48,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const Spacer(
                 flex: 8,
               ),
-              Text(
-                "Create An Account",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4!
-                    .copyWith(fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    MediaQuery.of(context).platformBrightness ==
+                            Brightness.light
+                        ? 'assets/icons/logo.png'
+                        : 'assets/icons/logo.png',
+                    height: size.height * 0.14,
+                  ),
+                  Flexible(
+                    child: Text(
+                      "Be a Member",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
               const Spacer(
                 flex: 2,

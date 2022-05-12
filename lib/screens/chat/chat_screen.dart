@@ -82,7 +82,7 @@ class _MessageScreenState extends State<MessageScreen> {
               onPressed: () {
                 FirebaseAuth.instance.signOut().then((value) {
                   Fluttertoast.showToast(msg: "Logged out");
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => SigninOrSignupScreen(),
