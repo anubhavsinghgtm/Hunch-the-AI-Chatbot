@@ -31,6 +31,8 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
 
   final TextEditingController _passwordTextController = TextEditingController();
 
+  String currentTime = DateTime.now().toString();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,7 +43,7 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
           child: Column(
             children: [
               const Spacer(
-                flex: 7,
+                flex: 14,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,13 +54,16 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                     children: [
                       Text(
                         'Hello',
+                        // currentTime.substring(11, 16),
                         style: Theme.of(context)
                             .textTheme
                             .headline2!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "Good Evening",
+                        (int.parse(currentTime.substring(11, 13)) > 12)
+                            ? 'Good Evening'
+                            : 'Good Morning',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 18,
@@ -80,7 +85,7 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                 ],
               ),
               const Spacer(
-                flex: 2,
+                flex: 3,
               ),
               RoundedInputField(
                   validator: (value) {
@@ -134,7 +139,7 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                 );
               }),
               const Spacer(
-                flex: 4,
+                flex: 8,
               ),
             ],
           ),
