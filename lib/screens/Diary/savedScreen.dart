@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:hunch/model/dairy_model.dart';
 import 'package:hunch/screens/Diary/diary_screen.dart';
@@ -33,11 +31,6 @@ class _ViewSavedScreenState extends State<ViewSavedScreen> {
   }
 
   void scrollDown() {
-    // _scrollController.animateTo(
-    //   _scrollController.position.maxScrollExtent,
-    //   duration: const Duration(seconds: 2),
-    //   curve: Curves.fastOutSlowIn,
-    // );
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
         _scrollController.position.minScrollExtent,

@@ -1,6 +1,4 @@
 import 'dart:math';
-
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -8,10 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hunch/components/primary_button.dart';
 import 'package:hunch/components/text_field_container.dart';
-import 'package:hunch/model/ChatMessage.dart';
-import 'package:hunch/model/dairy_model.dart';
 import 'package:hunch/screens/Diary/savedScreen.dart';
-import 'package:hunch/screens/Diary/select_feelings.dart';
 
 import '../../constants.dart';
 
@@ -32,17 +27,7 @@ class DiaryScreen extends StatelessWidget {
 
   final _feelingController = TextEditingController();
   final now = DateTime.now().toString().substring(0, 10);
-  int maxId = 0;
 
-  // void _save() {
-  //   final thought = _thoughtController.text;
-  //   final dailyThought = database.child('dailyThought');
-  //   dailyThought.set({'thought': thought, 'date': now, 'Feeling': "Feelings"});
-  //   print("done");
-  //   //   //final date = _dateController.text;
-  //   //   //final feeling = _feelingController.text;
-  //
-  // }
   void insertData(String thought, String feeling) {
     FocusManager.instance.primaryFocus
         ?.unfocus(); //to dismiss the onscreen keyboard
@@ -174,66 +159,9 @@ class DiaryScreen extends StatelessWidget {
       return datalist;
     });
 
-    // ref.once().then((event) {
-    //   datalist.clear();
-    //   Object? values = event.snapshot.value;
-    //   String? s = event.previousChildKey;
-    //   int maxId = int.parse(s!);
-    //   print(values);
-    // });
-    // print(datalist);
-    // return datalist;
     return datalist;
   }
 }
-
-// class DairyDatabase {
-//   // database reference
-//   final firebaseRef = FirebaseDatabase(
-//           databaseURL:
-//               "https://hunch-test-app-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//       .ref();
-
-//   // firebase auth reference
-//   final FirebaseAuth auth = FirebaseAuth.instance;
-
-//   static List<dynamic> datalist = [];
-
-//   static Future<List<dynamic>> getData() async {
-//     final uid = FirebaseAuth.instance.currentUser!.uid;
-//     final ref = FirebaseDatabase(
-//             databaseURL:
-//                 "https://hunch-test-app-default-rtdb.asia-southeast1.firebasedatabase.app/")
-//         .ref()
-//         .child('Dairy/$uid');
-
-//     Query query = ref.orderByKey().limitToLast(1);
-
-//     // ref.once().then((event) {
-//     //   datalist.clear();
-//     //   Map<dynamic, dynamic>? values = event.snapshot.value as Map?;
-//     //   values?.forEach((key, value) {
-//     //     datalist.add(value);
-//     //     print(value);
-//     //   });
-//     //   print(datalist);
-//     //   return datalist;
-//     // });
-
-//     query.once().then((event) {
-//       datalist.clear();
-//       Object? values = event.snapshot.value;
-//       String? s = event.previousChildKey;
-//       int maxId = int.parse(s!);
-//       print(values);
-//     });
-//     print(datalist);
-//     return datalist;
-
-//     // print(datalist.length);
-//     // return datalist;
-//   }
-// }
 
 class SelectFeelings extends StatefulWidget {
   // SelectFeelings({
